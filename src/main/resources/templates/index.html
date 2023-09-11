@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Employee Manager</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../style/bootstrap.css">
+    <style>
+        th, td {
+            padding: 0px;
+            min-width: 100px;
+            max-width: 200px;
+            text-align: center;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+
+<body class="bg-dark m-3">
+            <h1 class="text-center text-light m-5">Employee List</h1>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">
+                <a href="new" class="btn m-3 btn-primary btn-sm">Create New Employee</a>
+                <button id="exportBtn" class="btn btn-success m-3 btn-sm">Export to CSV</button>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-dark table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">Profile Photo</th>
+                        <th scope="col">Employee ID</th>
+                        <th scope="col">Matricule</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Birthdate</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Sex</th>
+                        <th scope="col">Phone Numbers</th>
+                        <th scope="col">Email Perso</th>
+                        <th scope="col">Email Pro</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Industry</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="employee : ${listEmployees}">
+                        <td>
+                            <img th:if="${employee.profilePhoto}" th:src="${employee.profilePhoto}"
+                                 class="img-thumbnail" alt="Profile Photo">
+                            <span th:unless="${employee.profilePhoto}">No photo available</span>
+                        </td>
+                        <td th:text="${employee.id}">Employee ID</td>
+                        <td th:text="${employee.matricule}">Matricule</td>
+                        <td th:text="${employee.firstname}">First Name</td>
+                        <td th:text="${employee.lastname}">Last Name</td>
+                        <td th:text="${employee.birthdate}">Birthdate</td>
+                        <td th:text="${employee.address}">Address</td>
+                        <td th:text="${employee.sexe}">Sex</td>
+                        <td>
+                            <ul>
+                                <li th:each="phone : ${employee.phones}" th:text="${phone.phoneNumber}"></li>
+                            </ul>
+                        </td>
+                        <td th:text="${employee.emailPerso}">Email Perso</td>
+                        <td th:text="${employee.emailPro}">Email Pro</td>
+                        <td th:text="${employee.role}">Role</td>
+                        <td th:text="${employee.industry.name}">Industry</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a th:href="@{'/details/' + ${employee.id}}" class="btn btn-info btn-sm">Details</a>
+                                <a th:href="@{'/edit/' + ${employee.id}}" class="btn btn-primary btn-sm">Edit</a>
+                                <form th:action="@{'/delete/' + ${employee.id}}" method="post">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <script src="../asset/bootstrap.js"></script>
+            <script>
+    $(document).ready(function () {
+        $("#exportBtn").on("click", function () {
+            exportToCSV();
+        });
+    });
+
+    function exportToCSV() {
+        const data = [];
+        const rows = $("#employeeTable tbody tr");
+        rows.each(function () {
+            const rowData = [];
+            $(this).find("td").each(function () {
+                rowData.push($(this).text());
+            });
+            data.push(rowData.join(","));
+        });
+
+        const csvContent = "data:text/csv;charset=utf-8," + data.join("\n");
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "employee_data.csv");
+        document.body.appendChild(link);
+        link.click();
+    }
+</script>
+</body>
+
+</html>

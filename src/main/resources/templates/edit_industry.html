@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Industry Information</title>
+  <link rel="stylesheet" href="../style/bootstrap.css">
+</head>
+<body>
+<div class="container">
+  <h1>Edit Industry Information</h1>
+  <form method="post" th:action="@{/api/save}" th:object="${industry}">
+    <div class="form-group">
+      <label for="industryName">Industry Name</label>
+      <input type="text" class="form-control" id="industryName" th:field="*{industryName}" required/>
+    </div>
+    <div class="form-group">
+      <label for="industryDescription">Industry Description</label>
+      <textarea class="form-control" id="industryDescription" th:field="*{industryDescription}"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="industrySlogan">Industry Slogan</label>
+      <input type="text" class="form-control" id="industrySlogan" th:field="*{industrySlogan}"/>
+    </div>
+    <div class="form-group">
+      <label for="industryEmail">Industry Email</label>
+      <input type="email" class="form-control" id="industryEmail" th:field="*{industryEmail}"/>
+    </div>
+    <div class="form-group">
+      <label for="nif">Industry Address</label>
+      <input type="text" class="form-control" id="nif" th:field="*{NIF}"/>
+    </div>
+    <div class="form-group">
+      <label for="stat">Industry Address</label>
+      <input type="text" class="form-control" id="stat" th:field="*{STAT}"/>
+    </div>
+    <div class="form-group">
+      <label for="rcs">Industry Address</label>
+      <input type="text" class="form-control" id="rcs" th:field="*{RCS}"/>
+    </div>
+    <div class="mb-3">
+      <label for="industryPhone" class="form-label">industry Phone</label>
+      <input type="text" class="form-control" id="industryPhone" th:field="*{industryPhone}" required
+             pattern="0(32|33|34|38)[0-9]{7}">
+      <div th:if="${#fields.hasErrors('industryPhone')}" class="alert alert-danger">
+        <p th:errors="*{phones}">Invalid phone number.</p>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="industryLogo" class="form-label">industry Logo</label>
+      <input type="file" class="form-control" id="industryLogo" name="industryLogo" accept="image/*"
+             onchange="previewImage(event)">
+      <img id="imagePreview" class="img-thumbnail mt-2" alt="industry Logo">
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+</div>
+<script src="../style/bootstrap.js"></script>
+</body>
+</html>

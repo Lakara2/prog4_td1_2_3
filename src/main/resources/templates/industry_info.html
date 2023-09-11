@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Industry Information</title>
+    <link rel="stylesheet" href="../style/bootstrap.css">
+</head>
+<body class="bg-dark">
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Industry Information</h1>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">
+                        <a href="/industry/1" class="btn btn-primary btn-sm">Edit industry</a>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p><strong>Industry Name: </strong><span th:text="${industry.industryName}"></span></p>
+                            <p><strong>Industry Description: </strong><span th:text="${industry.industryDescription}"></span></p>
+                            <p><strong>Industry Slogan: </strong><span th:text="${industry.industrySlogan}"></span></p>
+                            <p><strong>industry Phone: </strong><span th:text="${industry.industryPhone}"></span></p>
+                            <p><strong>industry Logo: </strong><span th:text="${industry.industryLogo}"></span></p>
+                            <p><strong>NIF: </strong><span th:text="${industry.NIF}"></span></p>
+                            <p><strong>STAT: </strong><span th:text="${industry.STAT}"></span></p>
+                            <p><strong>RCS: </strong><span th:text="${industry.RCS}"></span></p>
+                            <p><strong>industry Email: </strong><span th:text="${industry.industryEmail}"></span></p>
+                            <p><strong>industry Address: </strong><span th:text="${industry.industryAddress}"></span></p>
+                            <a href="/" class="btn btn-secondary">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <script src="../style/bootstrap.js"></script>
+</body>
+</html>

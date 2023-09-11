@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Employee Details</title>
+    <link rel="stylesheet" href="../style/bootstrap.css">
+    <link rel="stylesheet" href="../style/tailwind.min.css">
+</head>
+
+<body class="bg-dark">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <p><strong>Profile Photo:</strong></p>
+                <div>
+                    <img class="img-thumbnail" th:src="@{'data:image/jpeg;base64,' + ${employee.profilePhoto}}"
+                        alt="No profile photo available">
+                    <p th:unless="${employee.profilePhoto}">No profile photo available</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Employee Details</h4>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Employee ID:</strong> <span th:text="${employee.id}"></span></p>
+                        <p><strong>Employee Matricule:</strong> <span th:text="${employee.matricule}"></span></p>
+                        <p><strong>Firstname:</strong> <span th:text="${employee.firstname}"></span></p>
+                        <p><strong>Lastname:</strong> <span th:text="${employee.lastname}"></span></p>
+                        <p><strong>Birthdate:</strong> <span th:text="${employee.birthdate}"></span></p>
+                        <p><strong>Address:</strong> <span th:text="${employee.address}"></span></p>
+                        <p><strong>Sex:</strong> <span th:text="${employee.sexe}"></span></p>
+                        <p><strong>Phone:</strong></p>
+                        <ul>
+                            <li th:each="phone : ${employee.phones}" th:text="${phone.phoneNumber}"></li>
+                        </ul>
+                        <p><strong>Industry:</strong> <span th:text="${employee.industry.name}"></span></p>
+                        <p><strong>Email Perso:</strong> <span th:text="${employee.emailPerso}"></span></p>
+                        <p><strong>Email Pro:</strong> <span th:text="${employee.emailPro}"></span></p>
+                        <p><strong>CIN Numero:</strong> <span th:text="${employee.cinNumero}"></span></p>
+                        <p><strong>CIN Date Delivrance:</strong> <span th:text="${employee.cinDateDelivrance}"></span>
+                        </p>
+                        <p><strong>CIN Lieu Delivrance:</strong> <span th:text="${employee.cinLieuDelivrance}"></span>
+                        </p>
+                        <p><strong>Role:</strong> <span th:text="${employee.role}"></span></p>
+                        <p><strong>Nombre Enfants:</strong> <span th:text="${employee.nombreEnfants}"></span></p>
+                        <p><strong>Date Embauche:</strong> <span th:text="${employee.dateEmbauche}"></span></p>
+                        <p><strong>Date Depart:</strong> <span th:text="${employee.dateDepart}"></span></p>
+                        <p><strong>Categorie Socio Professionnelle:</strong> <span
+                                th:text="${employee.categorieSocioProfessionnelle}"></span></p>
+                        <p><strong>Numero CNAPS:</strong> <span th:text="${employee.numeroCnaps}"></span></p>
+                        <a href="/" class="btn btn-secondary">Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../asset/bootstrap.js"></script>
+</body>
+
+</html>

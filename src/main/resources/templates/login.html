@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Login</title>
+    <link rel="stylesheet" href="../style/bootstrap.css">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+</head>
+<body class="text-center">
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+        <a href="/" class="navbar-brand">
+            <img id="logo" th:src="@{'/show-logo-company'}" alt="logo" width="30" height="24"
+                 class="d-inline-block align-text-top">
+        </a>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav me-auto mb-2 mb-md-0"></div>
+            <div class="d-flex">
+                <a class="btn btn-sm btn-secondary me-2" href="/">Home</a>
+                <a class="btn btn-sm btn-secondary me-2" href="/company">Company</a>
+                <a class="btn btn-sm btn-secondary me-2" href="/employees">Employees List</a>
+                <a class="btn btn-sm btn-secondary me-2" href="/create-employee">Create Employee</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main class="form-signin">
+    <form th:action="@{/login}" th:object="${loginObject}" method="post">
+        <img class="mb-4" th:src="@{'/show-logo-company'}" alt="" width="72" height="57">
+        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+        <div class="form-floating">
+            <input type="text" class="form-control" id="username-input"
+                   th:field="*{username}">
+            <label for="username-input">Username</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="password-input" placeholder="Password"
+                   th:field="*{password}">
+            <label for="password-input">Password</label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+    </form>
+</main>
+
+<script src="../asset/bootstrap.js"></script>
+<script src="../asset/script.js" ></script>
+
+</body>
+</html>

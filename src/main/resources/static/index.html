@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Employee Manager</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../style/bootstrap.css">
+</head>
+
+<body class="bg-dark">
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="text-center text-light mb-4">Employee List</h1>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-4">
+                <a href="new" class="btn btn-primary btn-sm">Create New Employee</a>
+            </div>
+            <table class="table table-bordered table-dark table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Employee ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Birthdate</th>
+                    <th scope="col">Profile Photo</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="employee : ${listEmployees}">
+                    <td th:text="${employee.id}">Employee ID</td>
+                    <td th:text="${employee.firstname}">FirstName</td>
+                    <td th:text="${employee.lastname}">LastName</td>
+                    <td th:text="${employee.birthDate}">Birthdate</td>
+                    <td>
+                        <img th:if="${employee.profilePhoto}" th:src="${employee.profilePhoto}" class="img-thumbnail" alt="Profile Photo">
+                        <span th:unless="${employee.profilePhoto}">No photo available</span>
+                    </td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a th:href="@{'/details/' + ${employee.id}}" class="btn btn-info btn-sm">Details</a>
+                            <a th:href="@{'/edit/' + ${employee.id}}" class="btn btn-primary btn-sm">Edit</a>
+                            <a th:href="@{'/delete/' + ${employee.id}}" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap JS -->
+<script src="../asset/bootstrap.js"></script>
+</body>
+
+</html>
